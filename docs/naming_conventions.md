@@ -9,6 +9,8 @@ Exception: acronyms that are the dominant mode of expression in the domain being
 
 ## Resource names
 
+SHOULD use nouns except when [controller pattern](patterns.md#Controllers) is unavoidable.
+
 SHOULD use the plural version of a resource name. For example, `/jobs`.
 
 Exception: the resourse is singleton within the system, e.g., `/status`.
