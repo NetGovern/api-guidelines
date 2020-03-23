@@ -1,3 +1,4 @@
 * [Intro](/)
 * [Naming Conventions](naming_conventions.md)
+* [HTTP Status Codes and Errors](codes_and_errors.md)
 * [Patterns](patterns.md)
