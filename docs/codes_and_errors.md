@@ -31,7 +31,7 @@ responses:
 | 201 Created | Returned on successful entity creation. | POST |
 | 202 Accepted | The request was successful and will be processed asynchronously. | POST, PUT, PATCH, DELETE |
 | 204 No Content | There is no response body. | HEAD, DELETE |
-| 207 Multi-Status | The response body contains multiple status informations for different parts of a batch/bulk request. | POST |
+| 207 Multi-Status | The response body contains multiple status informations for different parts of a [batch/bulk request](patterns.md#Batch/bulk-operations). | POST |
 
 
 ### Client side error codes
@@ -55,3 +55,13 @@ responses:
 | 500 Internal Server Error | A generic error indicating an unexpected server execution problem. Client retry may be sensible. | \<all\> |
 | 503 Service Unavailable | The server is temporarily unable to handle the request for a service. | \<all\> |
 
+
+## Errors
+
+The [`application/problem+json`](https://tools.ietf.org/html/rfc7807) MUST be used to communicate details about an error.
+
+Problem Detail is intended for use with the HTTP status codes 4xx and 5xx. Currently, you can check example [in Zalando docs](https://zalando.github.io/problem/schema.yaml).
+
+The RFC encourages problem types to be URI references pointing to the human-readable documentation, but we decided to follow [Zalando approach](https://opensource.zalando.com/restful-api-guidelines/#176). Thus, our problem types are not meant to be resolved and a valid format is: `/problems/unknown-location`.
+
+Batch/bulk error handling [is discussed here](patterns.md#Batch/bulk-operations).

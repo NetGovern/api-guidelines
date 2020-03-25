@@ -9,3 +9,10 @@ In case you still need to use controller, it MUST appear as the last segment in 
 HTTP method SHOULD be `POST`.
 
 Example: `POST /jobs/archive/{jobId}/start`
+
+
+## Batch/bulk operations
+
+TODO
+
+
