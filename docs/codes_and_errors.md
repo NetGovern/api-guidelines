@@ -30,7 +30,7 @@ responses:
 | 200 OK | The standard success response. | \<all\> |
 | 201 Created | Returned on successful entity creation. | POST |
 | 202 Accepted | The request was successful and will be processed asynchronously. | POST, PUT, PATCH, DELETE |
-| 204 No Content | There is no response body. | HEAD, DELETE |
+| 204 No Content | There is no response body. | DELETE |
 | 207 Multi-Status | The response body contains multiple status informations for different parts of a [bulk request](patterns.md#Bulk-operations). | POST |
 
 
