@@ -1,4 +1,4 @@
-# HTTP Request Methods
+## General
 
 Usage of HTTP methods MUST be compliant with the standardized semantics.
 
@@ -21,7 +21,7 @@ Methods MUST follow their respective common properties:
 
 ## GET
 
-`GET` requests are used to **read** either [a single](patterns.md#Read-resource) or [a collection resource](patterns.md#Read-collection).
+`GET` requests are used to **read** either [a single](patterns/basic.md#Read-resource) or [a collection resource](patterns/basic.md#Read-collection).
 
 Executing `GET` MUST NOT affect the system and/or change response on subsequent requests.
 
@@ -33,27 +33,27 @@ Executing `GET` MUST NOT affect the system and/or change response on subsequent 
 
 `POST` is used for:
 
-* [resource **creation**](patterns.md#Create-resource) (usually single)
+* [resource **creation**](patterns/basic.md#Create-resource) (usually single)
 
-* activating [controller resource](patterns.md#Controllers)
+* activating [controller resource](patterns/controllers.md)
 
-* [complex searches](patterns.md#Read-with-large-inputs)
+* [complex searches](patterns/basic.md#Read-with-large-inputs)
 
 
 ## PUT
 
-`PUT` requests are used to **update entire** resources ([single](patterns.md#Update-resource) or collection).
+`PUT` requests are used to **update entire** resources ([single](patterns/basic.md#Update-resource) or collection).
 
 It is not recommended to allow `PUT` for updating the entire collection.
 
 ## PATCH
 
-`PATCH` requests are used to [**update parts** of a single resource](patterns.md#Partially-update-resource).
+`PATCH` requests are used to [**update parts** of a single resource](patterns/basic.md#Partially-update-resource).
 
 `PATCH` MUST NOT be used on collections.
 
 
 ## DELETE
 
-`DELETE` requests are used to [**delete** resources](patterns.md#Delete-resource).
+`DELETE` requests are used to [**delete** resources](patterns/basic.md#Delete-resource).
 

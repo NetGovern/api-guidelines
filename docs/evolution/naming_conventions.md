@@ -1,5 +1,3 @@
-# Naming Conventions
-
 ## General
 
 SHOULD use verbose naming and SHOULD NOT use abbreviations.
@@ -7,9 +5,9 @@ SHOULD use verbose naming and SHOULD NOT use abbreviations.
 Exception: acronyms that are the dominant mode of expression in the domain being represented by the API.
 
 
-## Resource names
+## Resource Names
 
-SHOULD use nouns except when [controller pattern](patterns.md#Controllers) is unavoidable.
+SHOULD use nouns except when [controller pattern](patterns/controllers.md) is unavoidable.
 
 SHOULD use the plural version of a resource name. For example, `/jobs`.
 
@@ -18,17 +16,17 @@ Exception: the resourse is singleton within the system, e.g., `/status`.
 Resource names MUST be lower-case and use only alphanumeric characters and hyphens. The hyphen character, `-`, MUST be used as a word separator. Example: `/file-archive`
 
 
-## URI template variables
+## URI Template Variables
 
 MUST be `camelCase`. Example: `/{tenantId}`.
 
 
-## Query parameter names
+## Query Parameter Names
 
 MUST be `camelCase`.
 
 
-## HTTP headers
+## HTTP Headers
 
 SHOULD prefer hyphenated-pascal-case with exception to common abbreviations. Example: `Original-Message-ID`
 
@@ -50,11 +48,11 @@ Fields that represent arrays SHOULD be named using plural nouns.
 MUST be `camelCase`.
 
 
-## OpenAPI: operationId
+## OpenAPI: Operations
 
-MUST be `camelCase`.
+`operationId` MUST be `camelCase`.
 
 
-## OpenAPI and JSON Schema: model names
+## OpenAPI and JSON Schema: Model Names
 
 MUST be `PascalCase`.
