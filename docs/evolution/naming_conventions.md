@@ -33,7 +33,7 @@ SHOULD prefer hyphenated-pascal-case with exception to common abbreviations. Exa
 
 `X-` headers were initially reserved for proprietary parameters, but the usage of `X-` headers is deprecated per [RFC 6648](https://tools.ietf.org/html/rfc6648). It states that such headers should incorporate the organization’s name. In order to preserve backward compatibility, we keep the `X-` prefix for existing headers.
 
-### Body Field Names
+## Body Field Names
 
 MUST be `camelCase`.
 
@@ -42,7 +42,7 @@ Prefixes such as `is_` or `has_` SHOULD NOT be used for keys of type boolean.
 Fields that represent arrays SHOULD be named using plural nouns.
 
 
-### Enums
+## Enums
 
 MUST be `camelCase`.
 
