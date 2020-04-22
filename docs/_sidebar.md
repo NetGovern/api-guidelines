@@ -7,7 +7,7 @@
     * [HAL](message/hal.md)
     * [Problem Detail](message/errors.md)
     * [Foreign Key Relations](message/foreign_key_relations.md)
-    * Common Data Types
+    * [Common Data Types](message/data_types.md)
 * Evolution
     * [Naming Conventions](evolution/naming_conventions.md)
     * [Reserved Identifiers](evolution/reserved_identifiers.md)

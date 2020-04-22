@@ -10,13 +10,13 @@ Methods MUST follow their respective common properties:
 
 * **Cacheable** methods allows to respond to a current client request with a stored response from a prior request.
 
-| Method | Safe | Idemptotent | Cacheable |
-| ------ | ---- | ----------- | --------- |
-| `GET` | + | + | + |
-| `POST` | - | - | - |
-| `PUT` | - | + | - |
-| `PATCH` | - | + | - |
-| `DELETE` | - | + | - |
+| Method   | Safe               | Idemptotent        | Cacheable          |
+| -------- | ------------------ | ------------------ | ------------------ |
+| `GET`    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| `POST`   | :x:                | :x:                | :x:                |
+| `PUT`    | :x:                | :heavy_check_mark: | :x:                |
+| `PATCH`  | :x:                | :heavy_check_mark: | :x:                |
+| `DELETE` | :x:                | :heavy_check_mark: | :x:                |
 
 
 ## GET
