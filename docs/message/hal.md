@@ -97,7 +97,7 @@ Bounded collection represenation might look like this:
   },
   "totalCount": 2,
   "_embedded": {
-    "item": [
+    "items": [
       {
         "_links": {
             "self": {
@@ -121,7 +121,7 @@ Bounded collection represenation might look like this:
 }
 ```
 
-Resources directly contained inside collection MUST be represented as items of `item` list. This is the only place where it is valid to use singular noun for list names, because [according to RFC 6573](https://tools.ietf.org/html/rfc6573) it is a recommended relation type for representing a member of a collection.
+Resources directly contained inside collection MUST be represented as items of `items` list.
 
 
 ## Linking vs Embedding

@@ -4,7 +4,7 @@ Usage of HTTP methods MUST be compliant with the standardized semantics.
 
 Methods MUST follow their respective common properties:
 
-* **Safe** methods only for retrival of reourse representations and not affecting server state.
+* **Safe** methods only for retrival of resourse representations and not affecting server state.
 
 * **Idempotent** methods produce the same result if executed once or multiple times (and not causing uninteded effects). This does not require that the operation returns the same response and/or status code.
 
@@ -13,6 +13,7 @@ Methods MUST follow their respective common properties:
 | Method   | Safe               | Idemptotent        | Cacheable          |
 | -------- | ------------------ | ------------------ | ------------------ |
 | `GET`    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| `HEAD`    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | `POST`   | :x:                | :x:                | :x:                |
 | `PUT`    | :x:                | :heavy_check_mark: | :x:                |
 | `PATCH`  | :x:                | :heavy_check_mark: | :x:                |
@@ -29,6 +30,10 @@ Executing `GET` MUST NOT affect the system and/or change response on subsequent 
 `GET` request MUST NOT have a request body payload.
 
 
+## HEAD
+
+`HEAD` requests SHOULD act similar to `GET` requests, but without response body.
+
 ## POST
 
 `POST` is used for:
@@ -42,7 +47,7 @@ Executing `GET` MUST NOT affect the system and/or change response on subsequent 
 
 ## PUT
 
-`PUT` requests are used to **update entire** resources ([single](patterns/basic.md#Update-resource) or collection).
+`PUT` requests are used to **update entire** resource ([single](patterns/basic.md#Update-resource) or collection).
 
 It is not recommended to allow `PUT` for updating the entire collection.
 

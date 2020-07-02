@@ -1,5 +1,7 @@
 In the message body there SHOULD NOT be any field with trailing "id," "href," "url," etc. in its name.
 
+The exception is business level labels like `externalCaseId`.
+
 When a resource requires linking to other foreign objects, relation MUST be expressed as an object:
 
 ```json

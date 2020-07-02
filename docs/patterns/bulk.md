@@ -19,7 +19,7 @@ BulkResponse:
   title: BulkResponse
   type: object
   properties:
-    succeeded:
+    succeededItems:
       type: array
       items:
         type: object
@@ -28,7 +28,7 @@ BulkResponse:
             type: string
             description: Identifier that specifies occurrence of the processed item in the request data.
           <... typical success body for this item...>
-    failed:
+    failedItems:
       type: array
       items:
         $ref: '#/definitions/Problem'

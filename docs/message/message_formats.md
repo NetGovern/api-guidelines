@@ -12,7 +12,7 @@ The `application/problem+json` [(Problem Detail)](message/errors.md) MUST be use
 
 Request messages with body SHOULD support a `application/json` (JSON) format.
 
-Where applicable, request message SHOULD also support the `application/hal+json` format.
+Where applicable, request message MAY also support the `application/hal+json` format.
 
 ## Content Negotiation
 

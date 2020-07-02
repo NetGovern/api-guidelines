@@ -10,7 +10,7 @@ If collection does not exist response code should be `404`.
 
 ### Sorting
 
-Clients MUST assume no inherent ordering of resuls unless default sort order is specified.
+Clients MUST assume no inherent ordering of results unless default sort order is specified.
 
 Collection MAY support sorting by indicating a `sort` query parameter.
 
@@ -45,7 +45,7 @@ _Example:_
   },
   "totalCount": 910,
   "_embedded": {
-    "keys": [
+    "items": [
       { ... },
       ...
     ]
@@ -69,7 +69,7 @@ GET /keys?description=system
 ## Read Resource
 Use `GET` method.
 
-A single resource is typicall derived from the parent collection and often is more detailed than an item in the representaion of a collection resource.
+A single resource is typically derived from the parent collection and often is more detailed than an item in the representaion of a collection resource.
 
 _Example:_
 
@@ -108,7 +108,7 @@ In that case you MUST use `POST` and expect query parameters as a request body.
 
 Use `POST` method.
 
-The request body MAY be different than in `GET` or `PUT` response/request (as the server generates some values).
+The request body MAY be different than in `GET`, `PUT`, or `PATCH` response/request (as the server generates some values).
 
 In most cases the service SHOULD produce an identifier for the resourse.
 
@@ -131,8 +131,8 @@ Full representation response:
 {
   "id": "db602bbd-9ae6-4aad-8372-58605417bc45",
   "description": "System key",
-  "created_time": "2014-10-10T16:10:55Z",
-  "updated_time": "2014-10-10T16:10:55Z",
+  "createdAt": "2014-10-10T16:10:55Z",
+  "updatedAt": "2014-10-10T16:10:55Z",
   "hash": "...",
   "_links": {
     "self": {
@@ -155,7 +155,7 @@ Links-only response:
 }
 ```
 
-In case of any validation errors (including conflicts), `POST` should respond with `400` code.
+In case of any validation errors, `POST` should respond with `400` code. `409` is reserved for `id`-level validation errors.
 
 ## Update Resource
 Use `PUT` method.
@@ -169,7 +169,7 @@ PUT /keys/db602bbd-9ae6-4aad-8372-58605417bc45
 {
   "id": "db602bbd-9ae6-4aad-8372-58605417bc45",
   "description": "New value",
-  "created_time": "2014-01-01T16:10:55Z",
+  "createdAt": "2014-01-01T16:10:55Z",
 }
 ```
 
@@ -186,11 +186,11 @@ Successful response:
 }
 ```
 
-We always use `200` code and hypermedia controls links in the body in order to support operations with valid id updates.
+We always use `200` code and hypermedia controls links in the body in order to support operations with valid `id` updates.
 
 If the resource doesn't exist, `PUT` should respond with `404` code.
 
-In case of any validation errors (including conflicts), `PUT` should respond with `400` code.
+In case of any validation errors, `PUT` should respond with `400` or `409`codes.
 
 
 ## Partially Update Resource
@@ -220,8 +220,8 @@ Successful response should return the entire resource representation:
 {
   "id": "db602bbd-1111-2222-8372-58605417bc45",
   "description": "System key",
-  "created_time": "2014-10-10T16:10:55Z",
-  "updated_time": "2014-12-10T16:10:55Z",
+  "createdAt": "2014-10-10T16:10:55Z",
+  "updatedAt": "2014-12-10T16:10:55Z",
   "_links": {
     "self": {
       "href": "/keys/db602bbd-1111-2222-8372-58605417bc45"
@@ -232,7 +232,7 @@ Successful response should return the entire resource representation:
 
 If the resource doesn't exist, `PATCH` should respond with `404` code.
 
-In case of any validation errors (including conflicts), `PATCH` should respond with `400` code.
+In case of any validation errors, `PATCH` should respond with `400` or `409`codes.
 
 ## Delete Resource
 Use `DELETE` method.

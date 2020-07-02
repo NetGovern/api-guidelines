@@ -41,10 +41,13 @@ Prefixes such as `is_` or `has_` SHOULD NOT be used for keys of type boolean.
 
 Fields that represent arrays SHOULD be named using plural nouns.
 
+For time-based fields use `At` suffix: `createdAt`.
+
+For count fields use `Count` suffix: `failedCount`.
 
 ## Enums
 
-MUST be `camelCase`.
+MUST be `UPPER_CASE`.
 
 
 ## API Description

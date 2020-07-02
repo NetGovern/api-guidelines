@@ -2,7 +2,7 @@
 
 You MUST define all success responses in API specification.
 
-You MUST define all error repospense in API specification if they convey application-specific funcational sematics or are used in non-standard way. Otherwise, combine them using the following pattern (OpenAPI 3):
+You MUST define all error responses in API specification if they convey application-specific funcational sematics or are used in non-standard way. Otherwise, you MAY combine them using the following pattern (OpenAPI 3):
 
 ```yaml
 responses:
@@ -12,10 +12,10 @@ responses:
         content:
             "application/problem+json":
                 schema:
-                    $ref: <ref to common Probem schema >
+                    $ref: <ref to common Problem schema >
 ```
 
-- APIs MUST NOT return a status code that is not defined in these tables.
+- APIs SHOULD NOT return a status code that is not defined in these tables.
 - APIs MAY return only some of status codes defined in these tables.
 
 ## Success Codes
@@ -39,6 +39,7 @@ responses:
 | 404 Not Found | The server has not found anything matching the request URI. This either means that the URI is incorrect or the resource is not available. | \<all\> |
 | 405 Method Not Allowed | The server has not implemented the requested HTTP method. This is typically default behavior for API frameworks. | \<all\> |
 | 406 Not Acceptable | The server MUST return this status code when it cannot return the payload of the response using the media type requested by the client. For example, if the client sends an `Accept: application/xml` header, and the API can only generate `application/json`. | \<all\> |
+| 409 Conflict | Request cannot be completed due to conflict, e.g. when resource with the same `id` already exists or if there are concurrent, conflicting updates. | POST, PUT, PATCH, DELETE |
 | 415 Unsupported Media Type | The server MUST return this status code when the media type of the request's payload cannot be processed or client sends request without content type. For example, if the client sends a `Content-Type: application/xml` header, but the API can only accept `application/json`. | POST, PUT, PATCH, DELETE |
 | 429 Too Many Requests | The server must return this status code if the rate limit for the client has exceeded a predefined value. | \<all\> |
 

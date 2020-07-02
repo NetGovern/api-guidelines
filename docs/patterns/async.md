@@ -4,14 +4,9 @@ Async operations are also known as long running operations.
 
 The same resource MAY implement both async and sync behaviour by expecting `Prefer: respond-async` header for async requests.
 
-Request to perform async operation should return response as in the example:
+Request to perform async operation should return response with 202 status code and `_links.self` pointing to monitoring URL.
 
-```
-HTTP/1.1 202 Accepted
-Operation-Location: <monitoring URL>
-```
-
-Monitoring of accepted operation MUST be done by `GET <monitoring URL>`. The response will depend on the nature of the operation.
+Monitoring of accepted operation SHOULD be done by `GET <monitoring URL>`. The response will depend on the nature of the operation.
 
 Monitoring responses MAY contain `Retry-After` header.
 
@@ -20,20 +15,27 @@ Monitoring responses MAY contain `Retry-After` header.
 Async operations SHOULD be resource based. For example, to stop job run:
 
 ```
-DELETE /job-runs/{jobRunId}
+DELETE /job-runs/{id}
 ...
 HTTP/1.1 202 Accepted
-Operation-Location: https://<host>/job-runs/{jobRunId}
+
+{
+  "_links": {
+    "self": {
+      "href": "/job-runs/{id}"
+    }
+  }
+}
 ```
 
-The job run is stopping:
+The job run is still running:
 
 ```
-GET /job-runs/{jobRunId}
+GET /job-runs/{id}
 ...
 HTTP/1.1 200 OK
 {
-  "state": "stopping"
+  "state": "PROCESSING"
   <other job run info>
 }
 ```
@@ -42,11 +44,11 @@ HTTP/1.1 200 OK
 The job run is successfully stopped:
 
 ```
-GET /job-runs/{jobRunId}
+GET /job-runs/{id}
 ...
 HTTP/1.1 200 OK
 {
-  "state": "stopped"
+  "state": "STOPPED"
   <other job run info>
 }
 ```
@@ -54,11 +56,11 @@ HTTP/1.1 200 OK
 If system wasn't able to stop the job after some timeout:
 
 ```
-GET /job-runs/{jobRunId}
+GET /job-runs/{id}
 ...
 HTTP/1.1 200 OK
 {
-  "state": "zombie"
+  "state": "ZOMBIE"
   <other job run info>
 }
 ```
@@ -66,47 +68,60 @@ HTTP/1.1 200 OK
 Same approach works if the inital request was done to the controller resource:
 
 ```
-POST /clusters/{clusterId}/reboot
+POST /clusters/{id}/reboot
 ...
 HTTP/1.1 202 Accepted
-Operation-Location: https://<host>/clusters/{clusterId}
+
+{
+  "_links": {
+    "self": {
+      "href": "/clusters/{id}"
+    }
+  }
+}
 ```
 
 
 ## Async Bulk Operations
 
-It is preferable for async bulk operations to follow resoure-based approch too.
+It is preferable for async bulk operations to follow resoure-based approach too.
 
 The first case is when async bulk can be run only one at the time. For example, importing users:
 
 ```
-POST /users/import
+POST /users/maps/import
 ...
 
 HTTP/1.1 202 Accepted
-Operation-Location: https://<host>/users/import
+
+{
+  "_links": {
+    "self": {
+      "href": "/users/maps/import/{id}"
+    }
+  }
+}
 ```
 
 
 For monitoring the status:
 
 ```
-GET /users/import
+GET /users/import/{id}
 ...
 
 HTTP/1.1 200 Accepted
 Retry-After: 30
-Content-Type: application/json
 
 {
-  "state": "processing"
+  "state": "PROCESSING"
 }
 ```
 
 If the whole operation fails, monitoring response should be:
 
 ```
-GET /users/import
+GET /users/import/{id}
 ...
 
 HTTP/1.1 500
@@ -121,34 +136,6 @@ Content-Type: application/problem+json
 }
 ```
 
-And if operation succeeds, it should have typical bulk operation response schema with `state: "completed"` and code `207`.
+And if operation succeeds, it SHOULD have typical bulk operation response schema with `state: "COMPLETED"` and code `207`.
 
-
-The second case is when there could be more then one similar async bulk operations running. Then, the same import flow has a different first steps:
-
-
-```
-POST /users/import
-...
-
-HTTP/1.1 202 Accepted
-Operation-Location: https://<host>/users/import/{importId}
-```
-
-
-For monitoring the status:
-
-```
-GET /users/import/{importId}
-...
-
-HTTP/1.1 200 Accepted
-Retry-After: 30
-Content-Type: application/json
-
-{
-  "state": "processing"
-}
-```
-
-The next steps are the same. But you SHOULD consider whether it can be modelled as `job` and `job-run` resources.
+You SHOULD consider whether async bulk operation can be modelled as `job` and `job-run` resources.
